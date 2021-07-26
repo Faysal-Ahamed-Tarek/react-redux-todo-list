@@ -20,8 +20,10 @@ export const TodoList_Reducer = (state = JSON.parse(localStorage.getItem('TodoLi
             return {...state,Edited_List:{...state.Edited_List,TodoContent: action.payload}}
         }
         case "SaveEdit_Todo":{
-            const FindIndex = state.TodoItem.findIndex((Item) => Item.id === state.Edited_List.id);
-            return {...state,TodoItem:[...state.TodoItem,state.TodoItem[FindIndex].TodoContent = state.Edited_List.TodoContent],Edited_List:{id:"",TodoContent:""}};
+            const UpdateToDo = [...state.TodoItem];
+            const FindItem = UpdateToDo.findIndex((Item) => Item.id === state.Edited_List.id);
+            UpdateToDo[FindItem].TodoContent = state.Edited_List.TodoContent;
+            return {...state,TodoItem:UpdateToDo,Edited_List:{id:"",TodoContent:""}};
         }
         case "Clear_All": return {...state,TodoItem:[]};
         default: return state;

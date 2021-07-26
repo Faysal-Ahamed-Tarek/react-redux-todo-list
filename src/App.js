@@ -47,7 +47,7 @@ function App() {
     Dispatch(ClearAll_Action());
   }
 
-  // //Update Local Storage
+  //Update Local Storage
   useEffect(() => {
     localStorage.setItem('TodoList',JSON.stringify(ToDoList))
   },[ToDoList]);
@@ -76,7 +76,6 @@ function App() {
                           :
                         <p className="">{Item.TodoContent}</p>  
                       }
-                    
                     </div>
                     {
                       Edited_List.id === Item.id ? 
