@@ -7,6 +7,7 @@ import TodoList from "./components/TodoList";
 import {
   AddTodo_Action,
   ClearAll_Action,
+  ClearMessage_Action,
   DeleteTodo_Action,
   EditInput_Action,
   EditToDo_Action,
@@ -19,7 +20,7 @@ function App() {
 
   //Redux todo item store
   const ToDoList = useSelector((state) => state.TodoList);
-  const { InputController, TodoItem, Edited_List } = ToDoList;
+  const { InputController, TodoItem, Edited_List, Message } = ToDoList;
 
   //Get Input Value
   const InputValue = (e) => {
@@ -62,11 +63,21 @@ function App() {
     localStorage.setItem("TodoList", JSON.stringify(ToDoList));
   }, [ToDoList]);
 
+  //Update Message
+  useEffect(() => {
+    setTimeout(() => {
+      Dispatch(ClearMessage_Action());
+    }, 2000);
+  }, [Message]);
+
   return (
     <>
       <section className="container mx-auto">
         <div className="bg-white max-w-md m-5 md:mx-auto p-5 rounded mt-10">
           <h1 className="text-2xl text-center pt-2">React Redux Todo List</h1>
+          <h1 className="text-xl font-medium text-center text-green-500">
+            {Message && Message}
+          </h1>
           <Form
             FormSubmit={FormSubmit}
             InputValue={InputValue}

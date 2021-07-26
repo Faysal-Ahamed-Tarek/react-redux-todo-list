@@ -2,6 +2,7 @@ const TodoList = {
   InputController: { id: "", TodoContent: "" },
   TodoItem: [],
   Edited_List: { id: "", TodoContent: "" },
+  Message: "",
 };
 
 export const TodoList_Reducer = (
@@ -22,12 +23,17 @@ export const TodoList_Reducer = (
         ...state,
         TodoItem: [...state.TodoItem, state.InputController],
         InputController: { id: "", TodoContent: "" },
+        Message: "Todo Item has been Added",
       };
     case "Delete_Todo": {
       const Updated_ToDo = state.TodoItem.filter(
         (Item) => Item.id !== action.payload
       );
-      return { ...state, TodoItem: Updated_ToDo };
+      return {
+        ...state,
+        TodoItem: Updated_ToDo,
+        Message: "Todo Item has been Deleted",
+      };
     }
     case "Edit_Todo": {
       const { ID, ToDo } = action.payload;
@@ -49,10 +55,13 @@ export const TodoList_Reducer = (
         ...state,
         TodoItem: UpdateToDo,
         Edited_List: { id: "", TodoContent: "" },
+        Message: "Todo Item has been Edited",
       };
     }
+    case "Message":
+      return { ...state, Message: "" };
     case "Clear_All":
-      return { ...state, TodoItem: [] };
+      return { ...state, TodoItem: [], Message: "Todo Item has been Cleared" };
     default:
       return state;
   }

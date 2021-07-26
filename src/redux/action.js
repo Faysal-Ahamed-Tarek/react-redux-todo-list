@@ -47,3 +47,9 @@ export const SaveEdit_Action = () => {
     type: "SaveEdit_Todo",
   };
 };
+
+export const ClearMessage_Action = () => {
+  return {
+    type: "Message",
+  };
+};
